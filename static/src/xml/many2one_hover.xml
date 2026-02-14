@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="uf_many2one_widget.Many2One" t-inherit="web.Many2One" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_many2one')]" position="attributes">
+            <attribute name="t-on-mouseenter">onMouseEnter</attribute>
+            <attribute name="t-on-mouseleave">onMouseLeave</attribute>
+        </xpath>
+        <xpath expr="//a[hasclass('o_form_uri')]" position="attributes">
+            <attribute name="title"></attribute>
+            <attribute name="t-att-title">''</attribute>
+        </xpath>
+        <xpath expr="//span[contains(@t-att-title, 'displayName')]" position="attributes">
+            <attribute name="title"></attribute>
+            <attribute name="t-att-title">''</attribute>
+        </xpath>
+    </t>
+
+    <t t-name="uf_many2one_widget.ListRenderer.RecordRow" t-inherit="web.ListRenderer.RecordRow" t-inherit-mode="extension">
+        <xpath expr="//td[hasclass('o_data_cell')]" position="attributes">
+            <attribute name="t-on-mouseenter">(ev) => this.onCellMouseEnter(ev, record, column)</attribute>
+            <attribute name="t-on-mouseleave">(ev) => this.onCellMouseLeave(ev)</attribute>
+            <attribute name="data-tooltip"></attribute>
+            <attribute name="t-att-data-tooltip">''</attribute> 
+        </xpath>
+    </t>
+
+    <t t-name="uf_many2one_widget.HoverPopover">
+        <div class="p-2">
+            <h5 t-if="props.title" class="mb-2" t-esc="props.title"/>
+            <table class="table table-sm table-borderless mb-0">
+                <tbody>
+                    <tr t-foreach="props.fields" t-as="field" t-key="field.name">
+                        <th class="pe-3 text-muted" t-out="field.label"/>
+                        <td>
+                            <span t-out="field.value"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </t>
+
+</templates>
